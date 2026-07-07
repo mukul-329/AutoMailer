@@ -1,3 +1,3 @@
 window.APP_CONFIG = {
-  apiBaseUrl: "https://your-worker-subdomain.workers.dev"
+  apiBaseUrl: "https://email-automator-backend.mukulsengar329.workers.dev/"
 };
