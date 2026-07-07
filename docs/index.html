@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Automator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <p class="eyebrow">Public UI + Private Workflow</p>
+      <h1>Email Automator Control Panel</h1>
+      <p class="subcopy">
+        Sign in, prepare a request, preview the template, and securely trigger the private mailer workflow.
+      </p>
+    </section>
+
+    <section class="panel auth-panel">
+      <div class="panel-header">
+        <div>
+          <h2>Access</h2>
+          <p>Enter the app password to unlock email requests.</p>
+        </div>
+        <div id="authState" class="pill idle">Checking</div>
+      </div>
+      <div class="grid">
+        <label class="full">
+          App Password
+          <input id="appPassword" name="appPassword" type="password" placeholder="Enter the shared app password">
+        </label>
+      </div>
+      <div class="actions">
+        <button id="loginBtn" class="primary" type="button">Unlock</button>
+        <button id="logoutBtn" class="ghost" type="button">Lock</button>
+      </div>
+      <p class="hint" id="authMessage">Checking current session.</p>
+    </section>
+
+    <section class="workspace">
+      <form id="emailForm" class="panel form-panel">
+        <div class="panel-header">
+          <div>
+            <h2>Create Email Request</h2>
+            <p>The backend validates and forwards this to the private GitHub Actions workflow.</p>
+          </div>
+          <div id="statusPill" class="pill idle">Ready</div>
+        </div>
+
+        <div class="grid">
+          <label>
+            Company / Recruiter Name
+            <input id="companyName" name="companyName" placeholder="TechM" required>
+          </label>
+          <label>
+            Recipient Email
+            <input id="email" name="email" type="email" placeholder="recruiter@example.com" required>
+          </label>
+          <label class="full">
+            Custom Subject
+            <input id="subject" name="subject" placeholder="Optional. Leave empty to use the default subject.">
+          </label>
+          <label class="full">
+            Template
+            <select id="template" name="template" required></select>
+          </label>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="primary">Send Request</button>
+          <button type="button" id="previewBtn" class="ghost">Refresh Preview</button>
+        </div>
+
+        <p class="hint">Only fixed template IDs are allowed. If subject is empty, the backend uses the default one.</p>
+      </form>
+
+      <aside class="panel preview-panel">
+        <div class="panel-header">
+          <div>
+            <h2>Template Preview</h2>
+            <p>The preview is rendered locally with the selected company inserted.</p>
+          </div>
+        </div>
+        <pre id="templatePreview" class="preview"></pre>
+      </aside>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <div>
+          <h2>Request Payload</h2>
+          <p>Request body sent to the backend API.</p>
+        </div>
+      </div>
+      <pre id="payloadPreview" class="log"></pre>
+    </section>
+  </main>
+
+  <script src="./config.js"></script>
+  <script src="./app.js" type="module"></script>
+</body>
+</html>
